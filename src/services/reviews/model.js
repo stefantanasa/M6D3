@@ -5,6 +5,7 @@ import sequelize from "../../utils/db/connect.js";
 import Sequelize from "sequelize";
 
 import Product from "../products/model.js";
+import User from "../products/users.model.js";
 
 const Review = sequelize.define(
   "review",
@@ -29,7 +30,11 @@ const Review = sequelize.define(
 );
 
 Review.belongsTo(Product);
+Review.belongsTo(User);
 Product.hasMany(Review, {
+  onDelete: "CASCADE",
+});
+User.hasMany(User, {
   onDelete: "CASCADE",
 });
 
