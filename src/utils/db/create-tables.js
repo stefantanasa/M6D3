@@ -12,7 +12,7 @@ const createTables = async () => {
     const sqlQueryAsString = await fs.readFile(sqlFilePath, "utf-8");
     await pool.query(sqlQueryAsString);
     console.log("✅ Tables are successfully created");
-    await pool.end();
+    // await pool.end();
   } catch (error) {
     console.log("❌ Tables are not created");
     console.log(error);

@@ -2,15 +2,17 @@ import express from "express";
 import authorsRoutes from "./services/authors/routes.js";
 import blogsRoutes from "./services/blogs/routes.js";
 import { authenticateDatabase } from "./utils/db/connect.js";
-
 const server = express();
-
+import productsRouter from "./services/products/routes.js";
+import reviewsRouter from "./services/reviews/routes.js";
 const { PORT = 5001 } = process.env;
 
 server.use(express.json());
 
 server.use("/authors", authorsRoutes);
 server.use("/blogs", blogsRoutes);
+server.use("/products", productsRouter);
+server.use("/reviews", reviewsRouter);
 
 server.listen(PORT, () => {
   authenticateDatabase();
@@ -20,3 +22,10 @@ server.listen(PORT, () => {
 server.on("error", (error) => {
   console.log(`Server is stopped : ${error}`);
 });
+
+// {
+//     "product_name": "Some product",
+//     "product_category": "sport",
+//     "product_description" :"some kind of description",
+//     "product_price" : "24"
+// }
